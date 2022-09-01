@@ -1,13 +1,16 @@
-const User = require('./User');
-const Project = require('./Project');
+const User = require('./User.js')
+const Post = require('./Post.js')
+const Note = require('./Note.js')
+// your relationships go here...
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
+User.hasMany(Post, {foreignKey: 'uid'})
+Post.belongsTo(User, {foreignKey: 'uid'})
 
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
-});
+Post.hasMany(Note, {foreignKey: 'pid'})
+Note.belongsTo(Post, {foreignKey: 'pid'})
 
-module.exports = { User, Project };
+
+
+module.exports = { User, Post, Note }
+
+
